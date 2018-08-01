@@ -3,6 +3,7 @@ import json
 import itertools
 from collections import defaultdict
 
+import numpy as np
 import pandas as pd
 from scipy import stats
 
@@ -25,9 +26,13 @@ def main():
         for level in LEVELS:
             result = defaultdict(dict)
             for metric in METRICS:
+
                 # read in table
                 path = os.path.join(MODEL_DIR, '%s_%s.csv' % (level, metric))
                 model = pd.read_csv(path, index_col=0)
+
+                # need small constant for log
+                eps = np.percentile(model.values[model.values.nonzero()], 2)
 
                 # get rois found in this table
                 common_rois = set(model.index).intersection(rois)
@@ -36,7 +41,9 @@ def main():
 
                 # get network connectivity
                 network = model.loc[common_rois, common_rois].values.ravel()
-                popmean = model.values.mean()
+                network = np.log10(network + eps)
+
+                popmean = np.log10(model.values[model.values > eps]).mean()
 
                 # perform t test
                 prob = stats.ttest_1samp(network, popmean)[1]

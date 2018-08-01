@@ -1,0 +1,32 @@
+{
+  "connection_density": {
+    "p_value": 0.0020258670579477683,
+    "significant": "true",
+    "alpha": 0.01,
+    "network_rois": 12,
+    "total_rois": 39
+  },
+  "connection_strength": {
+    "p_value": 0.15538245650607713,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 12,
+    "total_rois": 39
+  },
+  "normalized_connection_density": {
+    "p_value": 3.7739196281232883e-07,
+    "significant": "true",
+    "alpha": 0.01,
+    "network_rois": 12,
+    "total_rois": 39
+  },
+  "normalized_connection_strength": {
+    "p_value": 0.004255569374968246,
+    "significant": "true",
+    "alpha": 0.01,
+    "network_rois": 12,
+    "total_rois": 39
+  },
+  "task": "3-chamber",
+  "level": "leaves"
+}

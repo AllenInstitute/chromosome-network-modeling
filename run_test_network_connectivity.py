@@ -52,8 +52,6 @@ def main():
 
                 # get rois found in this table
                 common_rois = set(model.index).intersection(rois)
-                if len(common_rois) < 2:
-                    continue
 
                 # get network connectivity
                 network = model.loc[common_rois, common_rois].values.ravel()

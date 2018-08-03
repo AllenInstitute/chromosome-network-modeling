@@ -1,0 +1,32 @@
+{
+  "connection_density": {
+    "p_value": 0.08583095844428565,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 3,
+    "total_rois": 39
+  },
+  "connection_strength": {
+    "p_value": 0.0663160312989308,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 3,
+    "total_rois": 39
+  },
+  "normalized_connection_density": {
+    "p_value": 0.1386406338132186,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 3,
+    "total_rois": 39
+  },
+  "normalized_connection_strength": {
+    "p_value": 0.10974463874701328,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 3,
+    "total_rois": 39
+  },
+  "task": "3-chamber",
+  "level": "ss"
+}

@@ -15,9 +15,9 @@ SUMMARY_STRUCTURES_SET_ID = 687527945
 METRICS = ('connection_density', 'connection_strength',
            'normalized_connection_density', 'normalized_connection_strength')
 
-def get_summary_structure_map(tree, structure_ids):
+def get_summary_structure_map(tree):
     all_targets = tree.get_structures_by_set_id([SUMMARY_STRUCTURES_SET_ID])
-    return {s['id'] : s['acronym'] for s in all_targets if s['id'] in structure_ids}
+    return {s['id'] : s['acronym'] for s in all_targets if s['id'] not in (934,)}
 
 def get_leaves_map(tree, structure_ids):
     all_targets = tree.get_structures_by_set_id([TARGET_SEARCH_SET_ID])
@@ -39,7 +39,7 @@ def main():
 
     for structure_set in ('ss', 'leaves'):
         if structure_set == 'ss':
-            id_acronym_map = get_summary_structure_map(tree, structure_ids)
+            id_acronym_map = get_summary_structure_map(tree)
         else:
             id_acronym_map = get_leaves_map(tree, structure_ids)
 

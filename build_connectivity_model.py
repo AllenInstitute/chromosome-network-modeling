@@ -19,7 +19,7 @@ def get_summary_structure_map(tree, structure_ids):
     all_targets = tree.get_structures_by_set_id([SUMMARY_STRUCTURES_SET_ID])
     return {s['id'] : s['acronym'] for s in all_targets if s['id'] in structure_ids}
 
-def get_all_targets_map(tree, structure_ids):
+def get_leaves_map(tree, structure_ids):
     all_targets = tree.get_structures_by_set_id([TARGET_SEARCH_SET_ID])
     n_children = list(map(len, tree.child_ids([s['id'] for s in all_targets])))
     return {s['id'] : s['acronym'] for s, n in zip(all_targets, n_children)
@@ -41,7 +41,7 @@ def main():
         if structure_set == 'ss':
             id_acronym_map = get_summary_structure_map(tree, structure_ids)
         else:
-            id_acronym_map = get_all_targets_map(tree, structure_ids)
+            id_acronym_map = get_leaves_map(tree, structure_ids)
 
         # regionalize (NOTE: bilateral sum)
         source_key = source_mask.get_key(structure_ids=id_acronym_map.keys())

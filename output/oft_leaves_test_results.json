@@ -1,27 +1,27 @@
 {
   "connection_density": {
-    "p_value": 1.0612061184941261e-07,
+    "p_value": 0.004502850683117299,
     "significant": "true",
     "alpha": 0.01,
     "network_rois": 35,
     "total_rois": 66
   },
   "connection_strength": {
-    "p_value": 2.3795982169159857e-10,
+    "p_value": 2.303618343529356e-05,
     "significant": "true",
     "alpha": 0.01,
     "network_rois": 35,
     "total_rois": 66
   },
   "normalized_connection_density": {
-    "p_value": 1.3147302564339099e-05,
-    "significant": "true",
+    "p_value": 0.13216240318381867,
+    "significant": "false",
     "alpha": 0.01,
     "network_rois": 35,
     "total_rois": 66
   },
   "normalized_connection_strength": {
-    "p_value": 3.157207066001118e-08,
+    "p_value": 0.00029732459701043253,
     "significant": "true",
     "alpha": 0.01,
     "network_rois": 35,

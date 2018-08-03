@@ -11,7 +11,7 @@ ROI_PATH = 'behavior_rois.json'
 OUTPUT_DIR = 'model'
 
 TARGET_SEARCH_SET_ID = 184527634
-SUMMARY_STRUCTURES_SET_ID = 167587189
+SUMMARY_STRUCTURES_SET_ID = 687527945
 METRICS = ('connection_density', 'connection_strength',
            'normalized_connection_density', 'normalized_connection_strength')
 
@@ -55,7 +55,7 @@ def main():
             table.index = [id_acronym_map[v] for v in table.index.values]
             table.columns = [id_acronym_map[v] for v in table.columns.values]
 
-            table.to_csv(os.path.join(OUTPUT_DIR, 'ss_%s.csv' % metric))
+            table.to_csv(os.path.join(OUTPUT_DIR, '%s_%s.csv' % (structure_set, metric)))
 
 
 if __name__ == '__main__':

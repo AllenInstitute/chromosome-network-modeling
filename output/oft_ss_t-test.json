@@ -1,28 +1,28 @@
 {
   "connection_density": {
-    "p_value": 0.00044026212816813644,
-    "significant": "true",
-    "alpha": 0.01,
-    "network_rois": 34,
-    "total_rois": 66
-  },
-  "connection_strength": {
-    "p_value": 1.0252728027859077e-05,
-    "significant": "true",
-    "alpha": 0.01,
-    "network_rois": 34,
-    "total_rois": 66
-  },
-  "normalized_connection_density": {
-    "p_value": 0.015000485087242707,
+    "p_value": 0.014594872835440826,
     "significant": "false",
     "alpha": 0.01,
     "network_rois": 34,
     "total_rois": 66
   },
-  "normalized_connection_strength": {
-    "p_value": 0.00039071222965369464,
+  "connection_strength": {
+    "p_value": 0.016837931452183635,
+    "significant": "false",
+    "alpha": 0.01,
+    "network_rois": 34,
+    "total_rois": 66
+  },
+  "normalized_connection_density": {
+    "p_value": 0.007958014471313887,
     "significant": "true",
+    "alpha": 0.01,
+    "network_rois": 34,
+    "total_rois": 66
+  },
+  "normalized_connection_strength": {
+    "p_value": 0.011368495646014196,
+    "significant": "false",
     "alpha": 0.01,
     "network_rois": 34,
     "total_rois": 66

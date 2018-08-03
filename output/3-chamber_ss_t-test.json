@@ -7,7 +7,7 @@
     "total_rois": 39
   },
   "connection_strength": {
-    "p_value": 1.0622473581863452e-30,
+    "p_value": 1.0622473581863454e-30,
     "significant": "true",
     "alpha": 0.01,
     "network_rois": 12,
@@ -21,12 +21,12 @@
     "total_rois": 39
   },
   "normalized_connection_strength": {
-    "p_value": 3.6084033330779903e-28,
+    "p_value": 3.608403333078041e-28,
     "significant": "true",
     "alpha": 0.01,
     "network_rois": 12,
     "total_rois": 39
   },
   "task": "3-chamber",
-  "level": "leaves"
+  "level": "ss"
 }

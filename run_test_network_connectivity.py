@@ -10,12 +10,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-ROI_PATH = 'behavior_rois.json'
+ROI_PATH = 'deepest_rois.json'
 MODEL_DIR = 'model'
 OUTPUT_DIR = 'output'
 
 ALPHA = 0.01
-LEVELS = ('leaves', 'ss')
+LEVELS = ('leaves', 'ss', 'deepest')
 METRICS = ('connection_density', 'connection_strength',
            'normalized_connection_density', 'normalized_connection_strength')
 
@@ -48,19 +48,20 @@ def main():
                 model = pd.read_csv(path, index_col=0)
 
                 # need small constant for log
-                eps = np.percentile(model.values[model.values.nonzero()], 5)
+                eps = np.percentile(model.values[model.values.nonzero()], 3)
 
                 # get rois found in this table
                 common_rois = set(model.index).intersection(rois)
 
                 # get network connectivity
                 network = model.loc[common_rois, common_rois].values.ravel()
-                network = np.log10(network + eps)
+                network = np.log10(network[network > eps] + eps)
                 population = np.log10(model.values[model.values > eps])
 
-                fig = plot_dists(population, network, '%s ROI %s' % (task, metric))
+                fig = plot_dists(population, network, '%s ROI %s (%s)' % (task, metric, level))
                 fig.savefig(os.path.join(
                     OUTPUT_DIR, 'figures', '%s_%s_%s.png' % (task, level, metric)))
+                plt.close(fig)
 
                 # perform t test
                 #prob = stats.ttest_1samp(network, population.mean())[1]

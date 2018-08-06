@@ -1,32 +1,32 @@
 {
   "connection_density": {
-    "p_value": 0.0046627021625579345,
+    "p_value": 4.4395878455642174e-08,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 35,
+    "network_rois": 38,
     "total_rois": 53
   },
   "connection_strength": {
-    "p_value": 0.7188374584076533,
-    "significant": "false",
+    "p_value": 9.953174828652632e-05,
+    "significant": "true",
     "alpha": 0.01,
-    "network_rois": 35,
+    "network_rois": 38,
     "total_rois": 53
   },
   "normalized_connection_density": {
-    "p_value": 2.388646588888491e-10,
+    "p_value": 3.552960719339025e-15,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 35,
+    "network_rois": 38,
     "total_rois": 53
   },
   "normalized_connection_strength": {
-    "p_value": 0.050262288963455456,
-    "significant": "false",
+    "p_value": 8.464586768489929e-10,
+    "significant": "true",
     "alpha": 0.01,
-    "network_rois": 35,
+    "network_rois": 38,
     "total_rois": 53
   },
   "task": "oft",
-  "level": "ss"
+  "level": "deepest"
 }

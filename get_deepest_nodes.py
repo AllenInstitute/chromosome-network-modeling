@@ -16,18 +16,24 @@ def main():
 
     # initialize cache object
     cache = VoxelModelCache(manifest_file=MANIFEST_FILE)
+    rs = cache.get_reference_space()
+    rs.remove_unassigned(update_self=True)
 
     # get mapping from acronym to id
-    tree = cache.get_structure_tree()
-    acronym_id_map = tree.get_id_acronym_map()
+    acronym_id_map = rs.structure_tree.get_id_acronym_map()
     id_acronym_map = {v : k for k, v in acronym_id_map.items()}
 
     result = dict()
     for task, rois in task_rois.items():
-        roi_ids = [acronym_id_map[k] for k in rois]
-        overlapping_ancestors = tree.has_overlaps(roi_ids)
+        roi_ids = set()
+        for k in rois:
+            try:
+                roi_ids.add(acronym_id_map[k])
+            except KeyError:
+                pass
+        overlapping_ancestors = rs.structure_tree.has_overlaps(roi_ids)
 
-        leaves = set(roi_ids).difference(overlapping_ancestors)
+        leaves = roi_ids.difference(overlapping_ancestors)
         result[task] = [id_acronym_map[k] for k in leaves]
 
     with open(LEAVES_PATH, 'w') as f:

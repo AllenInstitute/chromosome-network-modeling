@@ -34,10 +34,12 @@ def main():
 
     # initialize cache object
     cache = VoxelModelCache(manifest_file=MANIFEST_FILE)
+    rs = cache.get_reference_space()
+    rs.remove_unassigned(update_self=True)
+    tree = rs.structure_tree
 
     # get mapping from acronym to id
-    tree = cache.get_structure_tree()
-    structure_ids = np.unique(cache.get_reference_space().annotation)[1:].tolist()
+    structure_ids = np.unique(rs.annotation)[1:].tolist()
     structure_ids += tree.parent_ids(structure_ids)
     structure_ids = set(structure_ids)
 

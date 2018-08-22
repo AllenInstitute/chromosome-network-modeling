@@ -1,31 +1,31 @@
 {
   "connection_density": {
-    "p_value": 1.9669748768119208e-08,
+    "p_value": 8.529036471778177e-21,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 20,
-    "total_rois": 34
+    "network_rois": 21,
+    "total_rois": 22
   },
   "connection_strength": {
-    "p_value": 5.605416354265718e-12,
+    "p_value": 1.533182838566214e-22,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 20,
-    "total_rois": 34
+    "network_rois": 21,
+    "total_rois": 22
   },
   "normalized_connection_density": {
-    "p_value": 2.967729926252979e-06,
+    "p_value": 1.501357625963549e-15,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 20,
-    "total_rois": 34
+    "network_rois": 21,
+    "total_rois": 22
   },
   "normalized_connection_strength": {
-    "p_value": 1.8064970821207463e-09,
+    "p_value": 3.637859236641558e-19,
     "significant": "true",
     "alpha": 0.01,
-    "network_rois": 20,
-    "total_rois": 34
+    "network_rois": 21,
+    "total_rois": 22
   },
   "task": "3-chamber",
   "level": "leaves"

@@ -1,6 +1,6 @@
+# TODO: sample randomly from population keeping distance distribution of ROIs
 import os
 import json
-import itertools
 from collections import defaultdict
 
 from scipy import stats
@@ -9,7 +9,11 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from mcmodels.core import VoxelModelCache
 
+MANIFEST_FILE = os.path.join(os.path.expanduser('~'), 'connectivity',
+                             'voxel_model_manifest.json')
+TARGET_SEARCH_SET_ID = 184527634
 ROI_PATH = 'deepest_rois.json'
 MODEL_DIR = 'model'
 OUTPUT_DIR = 'output'
@@ -38,6 +42,9 @@ def main():
     with open(ROI_PATH, 'r') as f:
         task_rois = json.load(f)
 
+    # initialize cache object
+    cache = VoxelModelCache(manifest_file=MANIFEST_FILE)
+
     for task, rois in task_rois.items():
         for level in LEVELS:
             result = defaultdict(dict)
@@ -55,7 +62,7 @@ def main():
 
                 # get network connectivity
                 network = model.loc[common_rois, common_rois].values.ravel()
-                network = np.log10(network[network > eps] + eps)
+                network = np.log10(network[network > eps])
                 population = np.log10(model.values[model.values > eps])
 
                 fig = plot_dists(population, network, '%s ROI %s (%s)' % (task, metric, level))
@@ -63,19 +70,14 @@ def main():
                     OUTPUT_DIR, 'figures', '%s_%s_%s.png' % (task, level, metric)))
                 plt.close(fig)
 
-                # perform t test
-                #prob = stats.ttest_1samp(network, population.mean())[1]
-
                 # perform nonparametric test
-                prob = stats.wilcoxon(
-                    network, np.full(network.shape, np.median(population)))[1]
+                prob = stats.mannwhitneyu(network, population)[1]
 
                 result[metric]['p_value'] = prob
                 result[metric]['significant'] = str(prob < ALPHA).lower()
                 result[metric]['alpha'] = ALPHA
                 result[metric]['network_rois'] = len(common_rois)
                 result[metric]['total_rois'] = len(rois)
-
 
             if not result:
                 continue

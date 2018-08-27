@@ -140,7 +140,7 @@ def main():
             json.dump(result, f, indent=2)
 
         # save ROI graph
-        model.loc[level, level].to_csv(
+        model.loc[net, net].to_csv(
             os.path.join(MODEL_DIR, '%s_normalized_connection_density.csv') % task)
 
 

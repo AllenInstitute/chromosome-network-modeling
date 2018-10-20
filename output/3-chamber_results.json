@@ -47,5 +47,7 @@
     "VISpl2/3"
   ],
   "p_value": 0.0,
+  "sample_median": 1.0365433773849347e-05,
+  "test_median": 0.00011289124981010923,
   "percentile": 100.0
 }

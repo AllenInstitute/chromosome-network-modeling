@@ -1,9 +1,7 @@
-from multiprocessing import Pool, cpu_count
 from collections import Counter
 from functools import partial
 import os
 import json
-import binascii
 
 from scipy import stats
 import numpy as np
@@ -27,12 +25,10 @@ SUMMARY_STRUCTURES_SET_ID = 687527945
 N_SAMPLES = 1000
 TASKS = ('oft', '3-chamber')
 
+SEED = 123
 
-def sample_network(weights, population, network, max_iter=10000, thresh=1, alpha=0.01):
-    def get_random_seed():
-        return int(binascii.b2a_hex(os.urandom(4)), 16)
 
-    rng = np.random.RandomState(get_random_seed())
+def sample_network(rng, weights, population, network, max_iter=10000, thresh=1, alpha=0.01):
 
     n = population.shape[0] # NOTE: should be square
     k = network.shape[0]
@@ -101,6 +97,9 @@ def main():
     # get level
     level = get_ss(tree, model.index.values)
 
+    # random number generator seeded for reproducability
+    rng = np.random.RandomState(SEED)
+
     for task in TASKS:
         net = set(level).intersection(task_rois[task])
 
@@ -113,11 +112,9 @@ def main():
         population = population[valid]
 
         # run
-        pool = Pool(processes=cpu_count())
-        func = partial(sample_network, weights, population, network,
+        func = partial(sample_network, rng, weights, population, network,
                        max_iter=int(1e6), thresh=0.25)
-        mapper = [pool.apply_async(func) for _ in range(N_SAMPLES)]
-        samples = np.array([np.median(f.get()) for f in mapper])
+        samples = np.array([np.median(func()) for _ in range(N_SAMPLES)])
 
         test = np.median(model.loc[net, net].values)
         print("unique graphs: ", Counter(np.unique(samples, return_counts=True)[1]))
@@ -132,11 +129,14 @@ def main():
         plt.close(fig)
 
         # save results
-        result = dict(task=task,
-                      rois=task_rois[task],
-                      p_value=p_value,
-                      percentile=pctl)
-        with open(os.path.join(OUTPUT_DIR, '%s_results' % task), 'w') as f:
+        result = {'task'          : task,
+                  'rois'          : task_rois[task],
+                  'p_value'       : p_value,
+                  'sample_median' : np.median(samples),
+                  'test_median'   : test,
+                  'percentile'    : pctl}
+
+        with open(os.path.join(OUTPUT_DIR, '%s_results.json' % task), 'w') as f:
             json.dump(result, f, indent=2)
 
         # save ROI graph

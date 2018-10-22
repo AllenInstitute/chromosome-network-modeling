@@ -130,7 +130,7 @@ def main():
 
         # save results
         result = {'task'          : task,
-                  'rois'          : task_rois[task],
+                  'rois'          : list(sorted(net)),
                   'p_value'       : p_value,
                   'sample_median' : np.median(samples),
                   'test_median'   : test,
